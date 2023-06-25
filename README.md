@@ -45,76 +45,12 @@ dataset.zip and codebert-python/pytorch_model.bin can be found here: https://dri
 
 ## Demo 
 
-- pip install torch
-- pip install transformers
-
-## Fine-Tune
-
-We fine-tuned the model on 2*V100-16G GPUs. 
-```shell
-lang=ruby
-mkdir -p ./saved_models/$lang
-python run.py \
-    --output_dir=./saved_models/$lang \
-    --config_name=microsoft/codebert-base \
-    --model_name_or_path=microsoft/codebert-base \
-    --tokenizer_name=microsoft/codebert-base \
-    --do_train \
-    --train_data_file=dataset/$lang/train.jsonl \
-    --eval_data_file=dataset/$lang/valid.jsonl \
-    --test_data_file=dataset/$lang/test.jsonl \
-    --codebase_file=dataset/$lang/codebase.jsonl \
-    --num_train_epochs 10 \
-    --code_length 256 \
-    --nl_length 128 \
-    --train_batch_size 32 \
-    --eval_batch_size 64 \
-    --learning_rate 2e-5 \
-    --seed 123456 2>&1| tee saved_models/$lang/train.log
-```
-## Inference and Evaluation
-
-```shell
-lang=ruby
-python run.py \
-    --output_dir=./saved_models/$lang \
-    --config_name=microsoft/codebert-base \
-    --model_name_or_path=microsoft/codebert-base \
-    --tokenizer_name=microsoft/codebert-base \
-    --do_eval \
-    --do_test \
-    --train_data_file=dataset/$lang/train.jsonl \
-    --eval_data_file=dataset/$lang/valid.jsonl \
-    --test_data_file=dataset/$lang/test.jsonl \
-    --codebase_file=dataset/$lang/codebase.jsonl \
-    --num_train_epochs 10 \
-    --code_length 256 \
-    --nl_length 128 \
-    --train_batch_size 32 \
-    --eval_batch_size 64 \
-    --learning_rate 2e-5 \
-    --seed 123456 2>&1| tee saved_models/$lang/test.log
-```
-
-## Demo
-
-```shell
-cd demo
-python demo.py
-```
+- demo.py
+  
+  能实实现Task Description中描述内容的脚本（原始，无排序）
+  
+- download_offline.py
+  
+  将HuggingFace上的预训练模型下载到本地，然后从本地加载模型
 
 
-## Results	
-
-The results on the filtered dataset are shown in this Table:
-
-| Model          |   Ruby    | Javascript |    Go     |  Python   |   Java    |    PHP    |  Overall  |
-| -------------- | :-------: | :--------: | :-------: | :-------: | :-------: | :-------: | :-------: |
-| NBow           |   0.162   |   0.157    |   0.330   |   0.161   |   0.171   |   0.152   |   0.189   |
-| CNN            |   0.276   |   0.224    |   0.680   |   0.242   |   0.263   |   0.260   |   0.324   |
-| BiRNN          |   0.213   |   0.193    |   0.688   |   0.290   |   0.304   |   0.338   |   0.338   |
-| SelfAtt        |   0.275   |   0.287    |   0.723   |   0.398   |   0.404   |   0.426   |   0.419   |
-| RoBERTa        |   0.587   |   0.517    |   0.850   |   0.587   |   0.599   |   0.560   |   0.617   |
-| RoBERTa (code) |   0.628   |   0.562    |   0.859   |   0.610   |   0.620   |   0.579   |   0.643   |
-| CodeBERT       |   0.679   |   0.620    |   0.882   |   0.672   |   0.676   |   0.628   |   0.693   |
-| GraphCodeBERT  | **0.703** | **0.644**  | **0.897** | **0.692** | **0.691** | **0.649** | **0.713** |
