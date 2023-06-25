@@ -2,6 +2,9 @@
 
 # Code Search
 
+## Task Description
+Given a natural language as the input, the task aims to find the most semantically related code from a collection of candidate codes. 
+
 ## Data Preprocess
 
 Different from the setting of [CodeSearchNet](husain2019codesearchnet), the answer of each query is retrieved from the whole development and testing code corpus instead of 1,000 candidate codes. Besides, we observe that some queries contain content unrelated to the code, such as a link ``http://..." that refers to external resources.  Therefore, we filter following examples to improve the quality of the dataset. 
