@@ -45,12 +45,21 @@ dataset.zip and codebert-python/pytorch_model.bin can be found here: https://dri
 
 ## Demo 
 
-- demo.py
+- demo/demo.py
   
   能实实现Task Description中描述内容的脚本（原始，无排序）
+
+- demo/demo_topN.py
   
-- download_offline.py
+  能实实现Task Description中描述内容的脚本（有排序，能给出Top N的代码及相应分数）
+  
+- demo/download_offline.py
   
   将HuggingFace上的预训练模型下载到本地，然后从本地加载模型
+
+## Results 
+![image](https://github.com/Katherine0214/CodeSearch/edit/main/Example1.png)
+
+![image](https://github.com/Katherine0214/CodeSearch/edit/main/Example2.png)
 
 
