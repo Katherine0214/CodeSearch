@@ -47,11 +47,11 @@ dataset.zip and codebert-python/pytorch_model.bin can be found here: https://dri
 
 - demo/demo.py
   
-  能实实现Task Description中描述内容的脚本（原始，无排序）
+  能实现Task Description中描述内容（原始，无排序）
 
 - demo/demo_topN.py
   
-  能实实现Task Description中描述内容的脚本（有排序，能给出Top N的代码及相应分数）
+  能实现Task Description中描述内容（有排序，能给出Top N的代码及相应分数）
   
 - demo/download_offline.py
   
